@@ -1,5 +1,5 @@
 ## NOTES/REMINDER
-Notes ad reminders app keep notes and set reminders.
+Notes add reminders app keep notes and set reminders.
 
 # Pages Discription
 - login page: user login/sign in (name, username, email, password)
