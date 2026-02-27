@@ -3,25 +3,39 @@ package np.com.rudichchhantel.screens.notes
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.*
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import np.com.rudichchhantel.ui.components.AppLayout
+import androidx.compose.ui.Modifier
 
 @Composable
 fun NotesScreen(navController: NavController) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp)
-    ) {
+    AppLayout(title = "Notes", navController = navController) {
 
-        Text("Notes Page", style = MaterialTheme.typography.headlineMedium)
+        Card(modifier = Modifier.fillMaxWidth()) {
+            Column(modifier = Modifier.padding(12.dp)) {
+                Text("Meeting Notes")
+                Text("Discuss project timeline")
+            }
+        }
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
-        Button(onClick = { navController.navigate("dashboard") }) {
-            Text("Back to Dashboard")
+        Card(modifier = Modifier.fillMaxWidth()) {
+            Column(modifier = Modifier.padding(12.dp)) {
+                Text("Shopping List")
+                Text("Milk, Bread, Eggs")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Card(modifier = Modifier.fillMaxWidth()) {
+            Column(modifier = Modifier.padding(12.dp)) {
+                Text("Ideas")
+                Text("Build reminder app UI")
+            }
         }
     }
 }

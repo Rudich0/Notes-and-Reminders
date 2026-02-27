@@ -3,48 +3,25 @@ package np.com.rudichchhantel.screens.dashboard
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.*
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import np.com.rudichchhantel.ui.components.AppLayout
+import androidx.compose.ui.Modifier
 
 @Composable
 fun DashboardScreen(navController: NavController) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(15.dp)
-    ) {
+    AppLayout(title = "Dashboard", navController = navController) {
 
-        Text("Dashboard", style = MaterialTheme.typography.headlineMedium)
+        Text("Total Users: 3")
+        Spacer(modifier = Modifier.height(10.dp))
 
-        Button(
-            onClick = { navController.navigate("notes") },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Go to Notes")
-        }
+        Text("Total Notes: 5")
+        Spacer(modifier = Modifier.height(10.dp))
 
-        Button(
-            onClick = { navController.navigate("reminder") },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Go to Reminder")
-        }
+        Text("Total Reminders: 4")
+        Spacer(modifier = Modifier.height(10.dp))
 
-        Button(
-            onClick = { navController.navigate("active") },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Active Reminders")
-        }
-
-        Button(
-            onClick = { navController.navigate("login") },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Logout")
-        }
+        Text("Active Reminders: 2")
     }
 }
