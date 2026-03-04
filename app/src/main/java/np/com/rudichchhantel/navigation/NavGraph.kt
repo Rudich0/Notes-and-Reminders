@@ -2,11 +2,12 @@ package np.com.rudichchhantel.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.*
-import np.com.rudichchhantel.screens.login.LoginScreen
+import np.com.rudichchhantel.screens.active.ActiveReminderScreen
 import np.com.rudichchhantel.screens.dashboard.DashboardScreen
+import np.com.rudichchhantel.screens.login.LoginScreen
+import np.com.rudichchhantel.screens.login.RegisterScreen
 import np.com.rudichchhantel.screens.notes.NotesScreen
 import np.com.rudichchhantel.screens.reminder.ReminderScreen
-import np.com.rudichchhantel.screens.active.ActiveReminderScreen
 
 @Composable
 fun NavGraph() {
@@ -20,6 +21,10 @@ fun NavGraph() {
 
         composable("login") {
             LoginScreen(navController)
+        }
+
+        composable("register") {
+            RegisterScreen(navController)
         }
 
         composable("dashboard") {

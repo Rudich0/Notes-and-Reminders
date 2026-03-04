@@ -11,17 +11,48 @@ import androidx.compose.ui.Modifier
 @Composable
 fun DashboardScreen(navController: NavController) {
 
-    AppLayout(title = "Dashboard", navController = navController) {
+    AppLayout(
+        title = "",
+        navController = navController,
+        showProfile = false
+    ) {
 
-        Text("Total Users: 3")
-        Spacer(modifier = Modifier.height(10.dp))
+        // USERNAME (Top Left)
+        Text(
+            text = "Rudich Chhantel",
+            style = MaterialTheme.typography.headlineSmall
+        )
 
-        Text("Total Notes: 5")
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(4.dp))
 
-        Text("Total Reminders: 4")
-        Spacer(modifier = Modifier.height(10.dp))
+        // SMALL DASHBOARD LABEL
+        Text(
+            text = "Dashboard",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
 
-        Text("Active Reminders: 2")
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            elevation = CardDefaults.cardElevation(8.dp)
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text("Total Users: 3")
+                Text("Total Notes: 5")
+                Text("Total Reminders: 4")
+                Text("Active Reminders: 2")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+        Button(
+            onClick = { navController.navigate("login") },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Logout")
+        }
     }
 }

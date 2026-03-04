@@ -1,6 +1,8 @@
 package np.com.rudichchhantel.ui.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,6 +14,8 @@ import androidx.navigation.NavController
 fun AppLayout(
     title: String,
     navController: NavController,
+    showProfile: Boolean = false,
+    showFab: Boolean = false,
     content: @Composable () -> Unit
 ) {
 
@@ -19,50 +23,60 @@ fun AppLayout(
 
         topBar = {
             TopAppBar(
-                title = {
-                    Text(text = title)
+                title = { Text(title) },
+                actions = {
+
+                    // Show profile icon on all pages except dashboard
+                    if (title != "Dashboard") {
+                        IconButton(
+                            onClick = { navController.navigate("dashboard") }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.AccountCircle,
+                                contentDescription = "Profile"
+                            )
+                        }
+                    }
                 }
             )
         },
 
+        floatingActionButton = {
+            if (showFab) {
+                FloatingActionButton(onClick = { }) {
+                    Text("+")
+                }
+            }
+        },
+
         bottomBar = {
             NavigationBar {
-
-                NavigationBarItem(
-                    selected = false,
-                    onClick = { navController.navigate("dashboard") },
-                    label = { Text("Dashboard") },
-                    icon = { }
-                )
-
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("notes") },
                     label = { Text("Notes") },
-                    icon = { }
+                    icon = {}
                 )
-
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("reminder") },
                     label = { Text("Reminder") },
-                    icon = { }
+                    icon = {}
                 )
-
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("active") },
                     label = { Text("Active") },
-                    icon = { }
+                    icon = {}
                 )
             }
         }
 
-    ) { innerPadding ->
+    ) { padding ->
 
         Column(
             modifier = Modifier
-                .padding(innerPadding)
+                .padding(padding)
                 .padding(16.dp)
                 .fillMaxSize()
         ) {
