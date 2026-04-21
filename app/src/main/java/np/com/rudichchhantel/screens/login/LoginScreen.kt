@@ -7,28 +7,37 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import np.com.rudichchhantel.R
+import np.com.rudichchhantel.viewmodel.LoginViewModel
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(
+    navController: NavController,
+    viewModel: LoginViewModel = viewModel()
+) {
+
+    val username by viewModel.username
+    val password by viewModel.password
+    val remember by viewModel.rememberMe
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)   // 🔥 Black background
+            .background(Color.Black)
             .padding(24.dp)
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        // 🔥 LOGO
         Image(
             painter = painterResource(id = R.drawable.logo),
             contentDescription = "App Logo",
@@ -46,49 +55,35 @@ fun LoginScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(20.dp))
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = username,
+            onValueChange = { viewModel.onUsernameChange(it) },
             label = { Text("Username") },
             modifier = Modifier.fillMaxWidth(),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = Color.White,
-                unfocusedTextColor = Color.White,
-                focusedBorderColor = Color.Yellow,
-                unfocusedBorderColor = Color.Gray,
-                focusedLabelColor = Color.Yellow,
-                unfocusedLabelColor = Color.Gray
-            )
+            colors = textFieldColors()
         )
 
         Spacer(modifier = Modifier.height(12.dp))
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = password,
+            onValueChange = { viewModel.onPasswordChange(it) },
             label = { Text("Password") },
             modifier = Modifier.fillMaxWidth(),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = Color.White,
-                unfocusedTextColor = Color.White,
-                focusedBorderColor = Color.Yellow,
-                unfocusedBorderColor = Color.Gray,
-                focusedLabelColor = Color.Yellow,
-                unfocusedLabelColor = Color.Gray
-            )
+            colors = textFieldColors()
         )
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+
             Checkbox(
-                checked = false,
-                onCheckedChange = {},
+                checked = remember,
+                onCheckedChange = { viewModel.onRememberChange(it) },
                 colors = CheckboxDefaults.colors(
                     checkedColor = Color.Yellow
                 )
             )
+
             Text("Remember Me", color = Color.White)
         }
 
@@ -114,3 +109,14 @@ fun LoginScreen(navController: NavController) {
         }
     }
 }
+
+@Composable
+private fun textFieldColors() =
+    OutlinedTextFieldDefaults.colors(
+        focusedTextColor = Color.White,
+        unfocusedTextColor = Color.White,
+        focusedBorderColor = Color.Yellow,
+        unfocusedBorderColor = Color.Gray,
+        focusedLabelColor = Color.Yellow,
+        unfocusedLabelColor = Color.Gray
+    )
